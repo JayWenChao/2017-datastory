@@ -1,5 +1,6 @@
 package cn.hy.com;
 
+import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,10 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class SpringbootCloudApplication {
 
+	private static final Logger logger = Logger.getLogger(SpringbootCloudApplication.class);
 
 	@RequestMapping(value = "/thymplate",method = RequestMethod.GET)
 	public String getHello(){
-
+        logger.info("为啥会这样");
 		System.out.println("-----------");
 		return "word";
 
