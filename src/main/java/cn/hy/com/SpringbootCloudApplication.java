@@ -20,7 +20,7 @@ public class SpringbootCloudApplication {
 
 	@RequestMapping(value = "/thymplate",method = RequestMethod.GET)
 	public String getHello(){
-        logger.info("为啥会这样");
+        logger.info("为啥会这是样");
 		System.out.println("-----------");
 		return "word";
 
