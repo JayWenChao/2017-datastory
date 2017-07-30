@@ -1,10 +1,14 @@
 package cn.hy.com.config;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.*;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import redis.clients.jedis.JedisPoolConfig;
@@ -13,6 +17,8 @@ import redis.clients.jedis.JedisPoolConfig;
  * Springboot-redis注意的事项
  * 第一步:设置好主机名，端口，以及最大连接空闲数，最小。
  * 第二步:在Redis中的Redis.conf配置文件中，修改bind 127.0.0.1为bind 0.0.0.0,同时打开requirepass "myRedis"认证权限密码
+ * config set requirepass "xxx"
+ * auth "xxx"
  * 第三步:使用RedisTemplate模板，设置连接jedisConnfactory,同时配置序列化
  * 第四步:实例化Redis五种数据类型
  *
@@ -61,6 +67,13 @@ public class RedisConfig {
         template.setValueSerializer(new JdkSerializationRedisSerializer());
         template.setHashKeySerializer(new StringRedisSerializer());
         template.setHashValueSerializer(new JdkSerializationRedisSerializer());
+       /* template.setKeySerializer(new StringRedisSerializer());
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer =new Jackson2JsonRedisSerializer();
+        ObjectMapper om = new ObjectMapper();
+        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        jackson2JsonRedisSerializer.serialize(om);
+        template.setValueSerializer(jackson2JsonRedisSerializer);*/
         template.setConnectionFactory(jedisConnectionFactory());
         return template;
     }
