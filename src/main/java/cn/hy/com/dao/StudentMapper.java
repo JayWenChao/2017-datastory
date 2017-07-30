@@ -27,12 +27,12 @@ public interface StudentMapper {
 
     /**
      *
-     * @param name
+     * @param username
      * @param passwd
      * @return
      */
-    @Insert("INSERT INTO student(name,passwd) values(#{name},#{passwd})")
-    public Integer insertObject(@Param("name")String name,@Param("passwd") String passwd);
+    @Insert("INSERT INTO student(username,passwd) values(#{username},#{passwd})")
+    public Integer insertObject(@Param("username")String username,@Param("passwd") String passwd);
 
 
     /**
@@ -43,4 +43,8 @@ public interface StudentMapper {
     @Cacheable
     @Select("SELECT *FROM student WHERE id = #{id}")
     public Student selectSingle(@Param("id") Integer id);
+
+    @Select("SELECT *FROM student WHERE username = #{username}")
+    public Student findObject(@Param("username") String username);
+
 }
