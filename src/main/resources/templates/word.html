@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>hello</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -7,5 +9,14 @@
 <body>
 <!--/*@thymesVar id="name" type="java.lang.String"*/-->
 <p th:text="'Hello！, ' + ${name} + '!'" >3333</p>
+
+<form th:action="@{/login}" method="post">
+
+    <div> <label>用户名:</label>
+     <input name="username" type="text">
+    </div>
+    <div><label>密码:</label><input type="password" name="password"></div>
+    <div><input type="submit" value="登录"></div>
+</form>
 </body>
 </html>
