@@ -53,8 +53,9 @@ public class ApplicationTest {
     public void data(){
         logger.info("测试数据");
        /* List<Student> flag = studentService.selectObject();*/
-        Student fg = studentService.selectSingle(3);
-        System.out.print(fg);
+       // Student fg = studentService.selectSingle(3);
+        Student object = studentService.findObject("spark");
+        System.out.print(object);
 
     }
 
