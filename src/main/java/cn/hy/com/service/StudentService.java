@@ -28,13 +28,13 @@ public class StudentService {
 
     /**
      *
-     * @param name
+     * @param username
      * @param passwd
      * @return
      */
-    public boolean insertObject(String name,String passwd){
+    public boolean insertObject(String username,String passwd){
 
-        Integer value = studentMapper.insertObject(name, passwd);
+        Integer value = studentMapper.insertObject(username, passwd);
         Student st = new Student();
         value = st.getId();
         if(value > 0) return true;
@@ -42,8 +42,17 @@ public class StudentService {
     }
 
     public Student selectSingle(Integer id){
-
         Student student = studentMapper.selectSingle(id);
         return student;
+    }
+
+    /**
+     * 验证身份
+     * @param username
+     * @return
+     */
+    public Student findObject(String username){
+
+        return studentMapper.findObject(username);
     }
 }
