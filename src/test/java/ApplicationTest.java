@@ -2,6 +2,8 @@ import cn.hy.com.SpringbootCloudApplication;
 import cn.hy.com.entity.Student;
 import cn.hy.com.service.StudentService;
 import org.apache.log4j.Logger;
+import org.elasticsearch.action.get.GetResponse;
+import org.elasticsearch.client.transport.TransportClient;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +35,8 @@ public class ApplicationTest {
 
     private static final Logger logger = Logger.getLogger(ApplicationTest.class);
 
+    @Autowired
+    private TransportClient client;
     private MockMvc mockMvc;
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -73,6 +77,15 @@ public class ApplicationTest {
         Student forObject = template.getForObject("http://localhost:8091/detail/3", Student.class);
         assertNotNull(forObject);
         assertEquals("阿秀",forObject.getUsername());
+    }
+
+    @Test
+    public void ES(){
+
+        logger.info("----------elasticsearch-----------");
+        GetResponse response = client.prepareGet("bank", "account", "995").execute().actionGet();
+        String string = response.getSourceAsString();
+        System.out.println(string);
     }
 
 }
