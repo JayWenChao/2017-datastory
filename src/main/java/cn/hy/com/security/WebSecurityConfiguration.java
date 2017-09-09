@@ -12,12 +12,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
+import org.springframework.stereotype.Component;
 
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@Component
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
@@ -69,8 +70,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
-        AuthenticationManager manager = super.authenticationManagerBean();
-        return manager;
+        AuthenticationManager authenticationManager = super.authenticationManagerBean();
+        return authenticationManager;
     }
 
 
